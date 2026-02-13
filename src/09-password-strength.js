@@ -17,7 +17,7 @@
  *   - 2–3 criteria → "medium"
  *   - 4 criteria   → "strong"
  *   - All 5        → "very strong"
- *
+ * 
  * Rules:
  *   - Empty string → "weak"
  *   - Non-string input → "weak"
@@ -27,4 +27,40 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+  if(password==="" || typeof password !== 'string') return 'weak';
+
+  let points = 0;
+  let strength;
+
+  if(password.length >= 8) points = points + 1;
+
+  if(/[A-Z]/.test(password)) points = points + 1;
+
+  if(/[a-z]/.test(password)) points = points + 1;
+
+  if(/[0-9]/.test(password)) points = points + 1;
+
+  if(/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) points = points + 1;
+
+
+  switch(points){
+    case 0:
+    case 1:
+      strength = "weak";
+      break;
+    case 2:
+    case 3:
+      strength = "medium"
+      break;
+    case 4:
+      strength = "strong";
+      break;
+    case 5:
+      strength = "very strong";
+      break;
+  }
+
+  return strength;
+
+
 }
